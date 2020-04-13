@@ -49,6 +49,7 @@ def main():
     root = tk.Tk()
     root.title('TODO Notes')
     app = App(master=root)
+    app.master.iconbitmap('todo.ico')
     app.mainloop()
 
 if __name__=='__main__':
