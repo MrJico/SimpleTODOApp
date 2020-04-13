@@ -9,6 +9,8 @@ class App(tk.Frame):
         self.notes = []
     
     def create_widgets(self):
+        self.scrollbar = tk.Scrollbar(self.master)
+        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.message = tk.Label(self.master, text=' TODO ' ,font='none 18', bg='dark slate blue').pack(side=tk.TOP, padx=5, pady=5  , fill=tk.BOTH )
 
         self.input_msg = tk.Label(self.master, text=' Text Input ', font='none 14', bg='slate blue').pack(side=tk.TOP, padx=5, pady=5, fill=tk.BOTH)
@@ -24,6 +26,8 @@ class App(tk.Frame):
 
         self.note_table = tk.Listbox(self.master, font='none 12 bold' , height=20, width=35, bg='sky blue1')
         self.note_table.pack(side=tk.TOP, padx=5, pady=5  , fill=tk.BOTH)
+        self.note_table.config(yscrollcommand=self.scrollbar.set)
+        self.scrollbar.config(command=self.note_table.yview)
 
         self.btn = tk.Button(self.master, text=' Clear Notes ', font='none 14', command=self.clear , bg='brown1' , fg='white')
         self.btn.pack(side=tk.BOTTOM, padx=5, pady=5  , fill=tk.BOTH)
@@ -47,7 +51,7 @@ class App(tk.Frame):
 
 def main():
     root = tk.Tk()
-    root.title('TODO Notes')
+    root.title('Simple TODO App')
     app = App(master=root)
     app.master.iconbitmap('todo.ico')
     app.mainloop()
